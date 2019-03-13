@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserItemComponent } from './components/user-item/user-item.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
+import { HomeComponent } from './components/home/home.component';
+import {AppRoutingModule} from './app-routing.module';
+import { HeaderComponent } from './components/layout/header/header.component';
 
 @NgModule({
   declarations: [
@@ -13,10 +16,13 @@ import { AddUserComponent } from './components/add-user/add-user.component';
     UsersComponent,
     UserItemComponent,
     AddUserComponent,
+    HomeComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
