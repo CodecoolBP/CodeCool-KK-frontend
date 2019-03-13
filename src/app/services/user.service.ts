@@ -13,16 +13,17 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UserService {
-  usersUrl = 'http://localhost:8080/users';
+  // localhost
+  usersUrl = 'http://192.168.160.180:8080/user';
 
   constructor(private http: HttpClient) {
   }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl);
+    return this.http.get<User[]>(this.usersUrl + '/list');
   }
 
-  addUser(user: User): Observable<User> {
-    return this.http.post<User>(this.usersUrl + '/add', user, httpOptions);
+  addUser(user: User): Observable<any> {
+    return this.http.post(this.usersUrl + '/add', user, httpOptions);
   }
 }

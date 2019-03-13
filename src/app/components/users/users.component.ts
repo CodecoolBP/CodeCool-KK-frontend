@@ -20,10 +20,8 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  addUser(user: User) {
-    this.userService.addUser(user).subscribe(user => {
-      this.users.push(user);
-    });
+  giveUser(user: User) {
+    console.log(this.userService.addUser(user));
   }
 
 }
