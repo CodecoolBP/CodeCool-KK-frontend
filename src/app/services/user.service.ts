@@ -23,7 +23,10 @@ export class UserService {
     return this.http.get<User[]>(this.usersUrl + '/list');
   }
 
-  addUser(user: User): Observable<any> {
-    return this.http.post(this.usersUrl + '/add', user, httpOptions);
+  addUser(user: User) {
+    this.http.post(this.usersUrl + '/add', user, httpOptions)
+      .subscribe(response => {
+        console.log(response);
+      });
   }
 }

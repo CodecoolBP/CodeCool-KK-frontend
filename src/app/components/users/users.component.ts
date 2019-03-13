@@ -21,7 +21,7 @@ export class UsersComponent implements OnInit {
   }
 
   giveUser(user: User) {
-    console.log(this.userService.addUser(user));
+    this.userService.addUser(user);
   }
 
 }
