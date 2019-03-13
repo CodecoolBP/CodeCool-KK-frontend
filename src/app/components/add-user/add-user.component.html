@@ -1,0 +1,32 @@
+<form class="form" method="post" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <input type="email" name="email" formControlName="email" placeholder="Email">
+  <input type="password" name="password" formControlName="password" placeholder="Password">
+  <input type="text" name="firstName" formControlName="firstName" placeholder="First name">
+  <input type="text" name="lastName" formControlName="lastName" placeholder="Last name">
+
+  <div>
+    <h3>Discount</h3>
+    <label class="container">Full price
+      <input type="radio" name="discount" formControlName="discount" value="FULL_PRICE">
+      <span class="checkmark"></span>
+    </label>
+    <label class="container">Student
+      <input type="radio" name="discount" formControlName="discount"  value="STUDENT">
+      <span class="checkmark"></span>
+    </label>
+    <label class="container">Retired
+      <input type="radio" name="discount" formControlName="discount" value="RETIRED">
+      <span class="checkmark"></span>
+    </label>
+    <label class="container">Disabled
+      <input type="radio" name="discount" formControlName="discount" value="DISABLED">
+      <span class="checkmark"></span>
+    </label>
+  </div>
+
+
+  <input type="submit" value="Submit" [disabled]="!userForm.valid" required="required" class="btn">
+</form>
+<h4>
+  Every field is required
+</h4>
