@@ -1,4 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {User} from '../../models/user/user';
 
 @Component({
   selector: 'app-add-user',
@@ -6,22 +8,37 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
-  @Output() addTodo: EventEmitter<any> = new EventEmitter();
-
+  @Output() addUser: EventEmitter<any> = new EventEmitter();
+  userForm = new FormGroup({
+    email: new FormControl('', Validators.compose([
+      Validators.required,
+      Validators.email
+    ])),
+    password: new FormControl('', Validators.compose([
+      Validators.minLength(5),
+      Validators.required,
+    ])),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    discount: new FormControl('', Validators.required)
+  });
   constructor() {
   }
-
-  firstName: string;
-  lastName: string;
+  user: User = new User();
 
   ngOnInit() {
+    // this.userForm = new FormGroup({
+    //   new FormControl(this.user.firstName)
+    // });
+
   }
 
   onSubmit() {
-    const user = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-    };
+    console.warn(this.userForm.value);
+    const user = this.user;
+    console.log(user);
+    this.addUser.emit(user);
   }
+
 
 }
