@@ -13,8 +13,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UserService {
-  // localhost
-  usersUrl = 'http://192.168.160.180:8080/user';
+  usersUrl = 'http://localhost:8080/user';
+  // usersUrl = 'http://192.168.160.180:8080/user';
 
   constructor(private http: HttpClient) {
   }
@@ -26,7 +26,7 @@ export class UserService {
   addUser(user: User) {
     this.http.post(this.usersUrl + '/add', user, httpOptions)
       .subscribe(response => {
-        console.log(response);
+          alert(response['message']);
       });
   }
 }
