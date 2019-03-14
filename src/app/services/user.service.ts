@@ -14,6 +14,7 @@ const httpOptions = {
 })
 export class UserService {
   usersUrl = 'http://localhost:8080/user';
+
   // usersUrl = 'http://192.168.160.180:8080/user';
 
   constructor(private http: HttpClient) {
@@ -26,7 +27,11 @@ export class UserService {
   addUser(user: User) {
     this.http.post(this.usersUrl + '/add', user, httpOptions)
       .subscribe(response => {
-          alert(response['message']);
+        // todo: different response from backend!
+        alert(response['message']);
+      }, (error) => {
+        console.log(error);
+        // todo: error handling
       });
   }
 }
