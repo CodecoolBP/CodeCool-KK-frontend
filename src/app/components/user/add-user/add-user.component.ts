@@ -1,6 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {User} from '../../models/user/user';
+import {User} from '../../../models/user/user';
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-add-user',
@@ -8,7 +9,6 @@ import {User} from '../../models/user/user';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
-  @Output() eventEmitter: EventEmitter<any> = new EventEmitter();
 
   userForm = new FormGroup({
     email: new FormControl('', Validators.compose([
@@ -24,7 +24,7 @@ export class AddUserComponent implements OnInit {
     discount: new FormControl('', Validators.required)
   });
 
-  constructor() {
+  constructor(private userService: UserService) {
   }
 
   user: User = new User();
@@ -38,7 +38,7 @@ export class AddUserComponent implements OnInit {
 
   onSubmit() {
     const user: User = this.userForm.value;
-    this.eventEmitter.emit(user);
+    console.log(this.userService.addUser(user));
   }
 
 
