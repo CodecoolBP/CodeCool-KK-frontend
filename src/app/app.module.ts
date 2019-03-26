@@ -11,6 +11,7 @@ import {AddUserComponent} from './components/user/add-user/add-user.component';
 import {HomeComponent} from './components/home/home.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HeaderComponent} from './components/layout/header/header.component';
+import { LoginComponent } from './components/user/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {HeaderComponent} from './components/layout/header/header.component';
     AddUserComponent,
     HomeComponent,
     HeaderComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
