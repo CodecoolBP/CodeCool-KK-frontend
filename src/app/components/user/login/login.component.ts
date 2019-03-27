@@ -20,10 +20,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email] ],
       password: ['', Validators.required]
     });
-    // get return url from route parameters or default to '/'
+    // formControls return url from route parameters or default to '/'
     this.returnUrl = '/';
   }
 
@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
     if (this.loginForm.invalid) {
       return;
     }
