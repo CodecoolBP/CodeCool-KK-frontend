@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../models/user/user';
 import {UserService} from '../../../services/user/user.service';
 
@@ -10,36 +10,36 @@ import {UserService} from '../../../services/user/user.service';
 })
 export class AddUserComponent implements OnInit {
 
-  userForm = new FormGroup({
-    email: new FormControl('', Validators.compose([
-      Validators.required,
-      Validators.email
-    ])),
-    password: new FormControl('', Validators.compose([
-      Validators.minLength(5),
-      Validators.required,
-    ])),
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    discount: new FormControl('', Validators.required)
-  });
+  submitted = false;
+  loading = false;
+  userForm: FormGroup;
 
-  constructor(private userService: UserService) {
+  get formControls() {
+    return this.userForm.controls;
+  }
+
+  constructor(private userService: UserService,
+              private formBuilder: FormBuilder) {
   }
 
   user: User = new User();
 
   ngOnInit() {
-    // this.userForm = new FormGroup({
-    //   new FormControl(this.user.firstName)
-    // });
-
+    this.userForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(5)]],
+      discount: ['', Validators.required]
+    });
   }
 
   onSubmit() {
+    this.submitted = true;
+    if (this.userForm.invalid) {
+      return;
+    }
     const user: User = this.userForm.value;
     console.log(this.userService.addUser(user));
   }
-
-
 }
