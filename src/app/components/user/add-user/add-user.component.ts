@@ -40,6 +40,6 @@ export class AddUserComponent implements OnInit {
       return;
     }
     const user: User = this.userForm.value;
-    console.log(this.userService.addUser(user));
+    this.userService.addUser(user);
   }
 }
