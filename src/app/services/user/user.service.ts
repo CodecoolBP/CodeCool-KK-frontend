@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {User} from '../models/user/user';
+import {User} from '../../models/user/user';
+import {environment} from '../../../environments/environment.prod';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UserService {
-  usersUrl = 'http://localhost:8080/user';
+  apiUrl = environment.apiUrl;
 
   // usersUrl = 'http://192.168.160.180:8080/user';
 
@@ -21,11 +22,11 @@ export class UserService {
   }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl + '/list');
+    return this.http.get<User[]>(this.apiUrl + '/user/list');
   }
 
   addUser(user: User) {
-    this.http.post(this.usersUrl + '/add', user, httpOptions)
+    this.http.post(this.apiUrl + '/user/add', user, httpOptions)
       .subscribe(response => {
         // todo: different response from backend!
         alert(response['message']);
