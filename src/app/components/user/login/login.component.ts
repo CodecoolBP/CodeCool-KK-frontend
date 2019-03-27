@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../models/user/user';
+import {UserService} from '../../../services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
 
   constructor(
+    private userService: UserService,
     private formBuilder: FormBuilder
   ) {
   }
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     const user: User = this.loginForm.value;
-    console.log(user.email);
+    this.userService.loginUser(user);
   }
 
 }

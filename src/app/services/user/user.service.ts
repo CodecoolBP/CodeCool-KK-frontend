@@ -35,4 +35,13 @@ export class UserService {
         // todo: error handling
       });
   }
+
+  loginUser(user: User) {
+    this.http.post(this.apiUrl + '/user/login', user, httpOptions)
+      .subscribe(response => {
+        alert(response['message']);
+      }, (error) => {
+        console.log(error);
+      });
+  }
 }
