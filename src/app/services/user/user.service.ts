@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../../models/user/user';
 import {environment} from '../../../environments/environment.prod';
+import {Router} from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,7 +19,7 @@ export class UserService {
 
   // usersUrl = 'http://192.168.160.180:8080/user';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   getUsers(): Observable<User[]> {
@@ -28,6 +29,7 @@ export class UserService {
   addUser(user: User) {
     this.http.post(this.apiUrl + '/user/add', user, httpOptions)
       .subscribe(response => {
+        this.router.navigate(['/login']);
         // todo: different response from backend!
         alert(response['message']);
       }, (error) => {
@@ -36,12 +38,4 @@ export class UserService {
       });
   }
 
-  loginUser(user: User) {
-    this.http.post(this.apiUrl + '/user/login', user, httpOptions)
-      .subscribe(response => {
-        alert(response['message']);
-      }, (error) => {
-        console.log(error);
-      });
-  }
 }
