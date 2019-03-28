@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../models/user/user';
 import {UserService} from '../../../services/user/user.service';
+import {AuthenticationService} from '../../../services/authentication/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authenticationService: AuthenticationService
   ) {
   }
 
@@ -39,7 +41,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     const user: User = this.loginForm.value;
-    this.userService.loginUser(user);
+    this.authenticationService.login(user);
   }
 
 }
