@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 
 import {environment} from '../../../environments/environment.prod';
 import {User} from '../../models/user/user';
+import {Router} from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,7 +19,7 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -28,14 +29,13 @@ export class AuthenticationService {
   }
 
   login(user: User) {
-    console.log(user.email);
-    console.log(user.password);
     this.http.post(`${environment.apiUrl}/user/login`, user, httpOptions)
       .subscribe(response => {
         alert(response['message']);
         if (response['success']) {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
+          this.router.navigate(['/']);
         }
       }, (error) => {
         console.log(error);
