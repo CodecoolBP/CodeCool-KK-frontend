@@ -1,3 +1,17 @@
-<p>
-  trip works!
-</p>
+<tr>
+  <td>
+    {{ trip.journeyStart }}
+  </td>
+  <td>
+    {{ trip.fromStation }}
+  </td>
+  <td>
+    {{ trip.vehicleType }} - {{ trip.vehicleNumber }}
+  </td>
+  <td>
+    {{ trip.success }}
+  </td>
+  <td *ngIf="trip.success">
+    {{ trip.success ? trip.price : "-" }}
+  </td>
+</tr>
