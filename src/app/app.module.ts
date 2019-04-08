@@ -11,7 +11,9 @@ import {AddUserComponent} from './components/user/add-user/add-user.component';
 import {HomeComponent} from './components/home/home.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HeaderComponent} from './components/layout/header/header.component';
-import { LoginComponent } from './components/user/login/login.component';
+import {LoginComponent} from './components/user/login/login.component';
+import {TripItemComponent} from './components/trip/trip-item/trip-item.component';
+import {TripsComponent} from './components/trip/trips/trips.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { LoginComponent } from './components/user/login/login.component';
     HomeComponent,
     HeaderComponent,
     LoginComponent,
+    TripItemComponent,
+    TripsComponent,
   ],
   imports: [
     BrowserModule,
