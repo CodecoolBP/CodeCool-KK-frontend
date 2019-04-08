@@ -31,7 +31,7 @@ export class UserService {
       .subscribe(response => {
         this.router.navigate(['/login']);
         // todo: different response from backend!
-        alert(response[ 'message' ]);
+        alert(response[`message`]);
       }, (error) => {
         console.log(error);
         // todo: error handling

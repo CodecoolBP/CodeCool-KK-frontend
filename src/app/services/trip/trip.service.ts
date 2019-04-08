@@ -4,16 +4,15 @@ import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../authentication/authentication.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-
-
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
 };
+
+@Injectable({
+  providedIn: 'root'
+})
 export class TripService {
 
   constructor(private authenticationService: AuthenticationService, private http: HttpClient, private router: Router) {
@@ -25,7 +24,7 @@ export class TripService {
       .subscribe(response => {
         this.router.navigate(['/login']);
         // todo: different response from backend!
-        alert(response[ 'message' ]);
+        alert(response[`message`]);
       }, (error) => {
         console.log(error);
         // todo: error handling

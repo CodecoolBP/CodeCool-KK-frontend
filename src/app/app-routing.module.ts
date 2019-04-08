@@ -7,10 +7,10 @@ import {AuthGuard} from './guards/auth.guard';
 import {TripsComponent} from './components/trip/trips/trips.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard]},
-  { path: 'history', component: TripsComponent, canActivate: [AuthGuard]},
-  { path: 'register', component: AddUserComponent},
-  { path: 'login', component: LoginComponent}
+  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: 'history', component: TripsComponent, canActivate: [AuthGuard]},
+  {path: 'register', component: AddUserComponent},
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({
