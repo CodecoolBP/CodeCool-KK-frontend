@@ -1,3 +1,14 @@
-<p>
-  trips works!
-</p>
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Station</th>
+    <th>Vehicle</th>
+    <th>Success</th>
+    <th>Price</th>
+  </tr>
+  <app-trip
+  *ngFor="let trip of trips"
+  [trip]="trip">
+
+  </app-trip>
+</table>
