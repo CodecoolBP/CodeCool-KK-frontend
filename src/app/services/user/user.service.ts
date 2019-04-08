@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../../models/user/user';
-import {environment} from '../../../environments/environment.prod';
+import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
 
 const httpOptions = {
@@ -31,7 +31,7 @@ export class UserService {
       .subscribe(response => {
         this.router.navigate(['/login']);
         // todo: different response from backend!
-        alert(response['message']);
+        alert(response[ 'message' ]);
       }, (error) => {
         console.log(error);
         // todo: error handling
