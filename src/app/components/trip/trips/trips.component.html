@@ -1,14 +1,30 @@
 <table>
-  <tr>
-    <th>Date</th>
-    <th>Station</th>
-    <th>Vehicle</th>
-    <th>Success</th>
-    <th>Price</th>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Station</th>
+      <th>Vehicle</th>
+      <th>Success</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let trip of trips">
+    <td>
+      {{ trip.journeyStart }}
+    </td>
+    <td>
+      {{ trip.fromStation }}
+    </td>
+    <td>
+      {{ trip.vehicleType }} - {{ trip.vehicleNumber }}
+    </td>
+    <td>
+      {{ trip.success }}
+    </td>
+    <td>
+      {{ trip.success ? trip.price : '-' }}
+    </td>
   </tr>
-  <app-trip
-  *ngFor="let trip of trips"
-  [trip]="trip">
-
-  </app-trip>
+  </tbody>
 </table>
