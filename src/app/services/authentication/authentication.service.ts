@@ -33,8 +33,6 @@ export class AuthenticationService {
   login(user: User) {
     this.http.post(`${environment.apiUrl}/user/login`, user, {observe: 'response'})
       .subscribe(response => {
-        console.log(response.status);
-        console.log(response.body.valueOf());
         if (response.status === 200) {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
@@ -42,7 +40,9 @@ export class AuthenticationService {
         }
       }, (error) => {
         if (error.status === 403) {
-          alert('Email address or password is incorrect');
+          alert(error.error);
+        } else {
+          alert(error.status);
         }
       });
   }

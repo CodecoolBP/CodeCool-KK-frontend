@@ -12,7 +12,6 @@ import {Station} from '../../../models/station/station';
 export class TripsComponent implements OnInit {
 
   trips: Trip[] = [];
-  station: Station = new Station();
 
   constructor(private tripService: TripService) {
   }
@@ -22,6 +21,9 @@ export class TripsComponent implements OnInit {
         trips.forEach(trip => {
           this.trips.push(trip);
         });
+      },
+      error1 => {
+        console.log(error1);
       }
     );
   }
