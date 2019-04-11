@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 import {environment} from '../../../environments/environment';
@@ -9,8 +9,10 @@ import {Router} from '@angular/router';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
-  })
+  }),
 };
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -29,16 +31,19 @@ export class AuthenticationService {
   }
 
   login(user: User) {
-    this.http.post(`${environment.apiUrl}/user/login`, user, httpOptions)
+    this.http.post(`${environment.apiUrl}/user/login`, user, {observe: 'response'})
       .subscribe(response => {
-        alert(response[`message`]);
-        if (response[`success`]) {
+        console.log(response.status);
+        console.log(response.body.valueOf());
+        if (response.status === 200) {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
           this.router.navigate(['/']);
         }
       }, (error) => {
-        console.log(error);
+        if (error.status === 403) {
+          alert('Email address or password is incorrect');
+        }
       });
   }
 
