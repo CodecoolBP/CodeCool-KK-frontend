@@ -1,18 +1,17 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 import {environment} from '../../../environments/environment';
 import {User} from '../../models/user/user';
 import {Router} from '@angular/router';
+import {AlertService} from '../alert/alert.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   }),
 };
-
-
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +20,11 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private alertService: AlertService
+  ) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -33,8 +36,6 @@ export class AuthenticationService {
   login(user: User) {
     this.http.post(`${environment.apiUrl}/user/login`, user, {observe: 'response'})
       .subscribe(response => {
-        console.log(response.status);
-        console.log(response.body.valueOf());
         if (response.status === 200) {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
@@ -42,7 +43,9 @@ export class AuthenticationService {
         }
       }, (error) => {
         if (error.status === 403) {
-          alert('Email address or password is incorrect');
+          this.alertService.addAlert(error.error, 'danger');
+        } else {
+          this.alertService.addAlert(error.status, 'danger');
         }
       });
   }
