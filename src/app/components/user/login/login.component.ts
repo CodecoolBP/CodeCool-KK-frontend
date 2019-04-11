@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-    // formControls return url from route parameters or default to '/'
     this.returnUrl = '/';
   }
 
@@ -43,5 +42,4 @@ export class LoginComponent implements OnInit {
     const user: User = this.loginForm.value;
     this.authenticationService.login(user);
   }
-
 }
