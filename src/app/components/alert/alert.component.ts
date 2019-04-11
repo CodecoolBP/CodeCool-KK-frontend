@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-
-class Alert {
-  type: string;
-  message: string;
-}
+import {NgbdAlert} from '../../models/ngbd-alert/ngbd-alert';
+import {AlertService} from '../../services/alert/alert.service';
 
 @Component({
   selector: 'app-alert',
@@ -12,23 +9,22 @@ class Alert {
 })
 export class AlertComponent implements OnInit {
 
-  private hasAlert: boolean;
-  private alert: Alert = new Alert();
+  public alert: NgbdAlert;
 
-  constructor() {
+  constructor(
+    private alertService: AlertService
+  ) {
   }
 
   ngOnInit() {
-    this.add('Welcome on site', 'success');
+    this.alertService.change.subscribe(nextAlert => {
+      this.alert = nextAlert;
+      }
+    );
   }
 
   private close() {
-    this.hasAlert = false;
+    this.alertService.remove();
   }
 
-  public add(message: string, type: string) {
-    this.alert.type = type;
-    this.alert.message = message;
-    this.hasAlert = true;
-  }
 }
