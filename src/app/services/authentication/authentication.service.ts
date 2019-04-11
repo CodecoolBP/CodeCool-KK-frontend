@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {User} from '../../models/user/user';
 import {Router} from '@angular/router';
+import {AlertService} from '../alert/alert.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,7 +20,11 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private alertService: AlertService
+  ) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -38,9 +43,9 @@ export class AuthenticationService {
         }
       }, (error) => {
         if (error.status === 403) {
-          alert(error.error);
+          this.alertService.addAlert(error.error, 'danger');
         } else {
-          alert(error.status);
+          this.alertService.addAlert(error.status, 'danger');
         }
       });
   }

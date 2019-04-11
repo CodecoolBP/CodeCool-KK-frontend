@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {User} from '../../models/user/user';
 import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
+import {AlertService} from '../alert/alert.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,9 +18,7 @@ const httpOptions = {
 export class UserService {
   apiUrl = environment.apiUrl;
 
-  // usersUrl = 'http://192.168.160.180:8080/user';
-
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private alertService: AlertService) {
   }
 
   getUsers(): Observable<User[]> {
@@ -30,11 +29,10 @@ export class UserService {
     this.http.post(this.apiUrl + '/user/add', user, httpOptions)
       .subscribe(response => {
         this.router.navigate(['/login']);
-        // todo: different response from backend!
-        alert(response[`message`]);
+        // @ts-ignore
+        this.alertService.addAlert(`User created with email: ${response.email}`, 'success');
       }, (error) => {
-        console.log(error);
-        // todo: error handling
+        this.alertService.addAlert(error.valueOf().error, 'danger');
       });
   }
 

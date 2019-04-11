@@ -25,15 +25,6 @@ export class TripService {
     const user = this.authenticationService.currentUserValue;
     const trips = this.http.get<Trip[]>(environment.apiUrl + '/' + user.email + '/history');
     return trips;
-      // .subscribe(response => {
-      //   this.router.navigate(['/login']);
-      //   // todo: different response from backend!
-      //   alert(response[`message`]);
-      // }, (error) => {
-      //   console.log(error);
-      //   // todo: error handling
-      // });
-
   }
 
 }
