@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 
-import {environment} from '../../../environments/environment.prod';
+import {environment} from '../../../environments/environment';
 import {User} from '../../models/user/user';
 import {Router} from '@angular/router';
 
@@ -31,8 +31,8 @@ export class AuthenticationService {
   login(user: User) {
     this.http.post(`${environment.apiUrl}/user/login`, user, httpOptions)
       .subscribe(response => {
-        alert(response['message']);
-        if (response['success']) {
+        alert(response[`message`]);
+        if (response[`success`]) {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
           this.router.navigate(['/']);

@@ -1,0 +1,31 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Station</th>
+      <th>Vehicle</th>
+      <th>Success</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody style="text-align: center" >
+  <tr *ngFor="let trip of trips">
+    <td type="date">
+      {{ trip.journeyStart.substring(0,10) }}
+      {{trip.journeyStart.substring(11,19 )}}
+    </td>
+    <td>
+      {{ trip.fromStation.name }}
+    </td>
+    <td>
+      {{ trip.vehicleType }} {{ trip.vehicleNumber }}
+    </td>
+    <td>
+      {{ trip.success }}
+    </td>
+    <td>
+      {{ trip.success ? trip.price : '-' }}
+    </td>
+  </tr>
+  </tbody>
+</table>
