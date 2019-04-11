@@ -3,8 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../authentication/authentication.service';
-import {User} from '../../models/user/user';
 import {Observable} from 'rxjs';
+import {Trip} from '../../models/trip/trip';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -21,9 +21,10 @@ export class TripService {
 
   }
 
-  getTrips(): Observable<User[]> {
-    const currentUser = this.authenticationService.currentUser;
-    return this.http.get<User[]>(environment.apiUrl + (currentUser as unknown as User).email + '/history');
+  getTrips(): Observable<Trip[]> {
+    const user = this.authenticationService.currentUserValue;
+    const trips = this.http.get<Trip[]>(environment.apiUrl + '/' + user.email + '/history');
+    return trips;
       // .subscribe(response => {
       //   this.router.navigate(['/login']);
       //   // todo: different response from backend!

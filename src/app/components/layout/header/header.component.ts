@@ -15,6 +15,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  history() {
+    const user = this.authenticationService.currentUserValue;
+    this.router.navigate([user.email + '/history']);
+  }
+
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
