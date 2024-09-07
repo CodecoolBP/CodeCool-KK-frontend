@@ -1,5 +1,7 @@
 # CckkFrontend
 
+Front-end of our mock implementation of "Rigó" (Oyster) of Budapest.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
 
 ## Development server
